@@ -40,5 +40,8 @@ const verifyToken = (token) => {
   } 
 };
 
+const token = generateToken({ id: 1, username: 'testuser' });
+console.log('Generated Token:', token);
+
 export { generateToken, authMiddleware , verifyToken };
 
