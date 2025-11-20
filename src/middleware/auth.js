@@ -40,5 +40,6 @@ const verifyToken = (token) => {
   } 
 };
 
+console.assert(first, second)
 export { generateToken, authMiddleware , verifyToken };
 
