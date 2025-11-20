@@ -30,5 +30,15 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-export { generateToken, authMiddleware };
+const verifyUserToken = (token) => {
+  try {
+    const secret = process .env.USERSECREAT;
+    return jwt.verify(token, secret);
+  } catch (err) {
+    return null;
+  }
+}
+
+
+export { generateToken, authMiddleware , verifyUserToken};
 
