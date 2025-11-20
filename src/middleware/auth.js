@@ -30,5 +30,12 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
+
+
+const first = generateToken({ id: 1, username: 'testuser' }); 
+const second = authMiddleware;
+
+console.assert(first, second)
+
 export { generateToken, authMiddleware };
 
