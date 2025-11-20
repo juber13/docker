@@ -44,5 +44,7 @@ console.assert(first, second)
 const token = generateToken({ id: 1, username: 'testuser' });
 console.log('Generated Token:', token);
 
+console.assert(first, second)
+
 export { generateToken, authMiddleware , verifyToken };
 
