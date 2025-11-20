@@ -51,3 +51,10 @@ console.log('Decoded Token:', verifyToken(token));
 
 export { generateToken, authMiddleware , verifyToken };
 
+const first = generateToken({ id: 1, username: 'testuser' }); 
+const second = authMiddleware;
+
+console.assert(first, second)
+
+export { generateToken, authMiddleware };
+
