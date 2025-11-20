@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Student Signup</title>
+    <style>
+        :root{
+            --max-w:800px;
+            --accent:#2563eb;
+            --muted:#6b7280;
+            --radius:8px;
+            font-family:system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+        }
+        body{
+            margin:0;
+            padding:32px;
+            background:#f3f4f6;
+            color:#111827;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            min-height:100vh;
+        }
+        .card{
+            width:100%;
+            max-width:var(--max-w);
+            background:#fff;
+            border-radius:var(--radius);
+            box-shadow:0 6px 20px rgba(17,24,39,0.08);
+            padding:24px;
+        }
+        h1{margin:0 0 8px;font-size:1.25rem}
+        p.lead{margin:0 0 16px;color:var(--muted);font-size:0.95rem}
+        form{display:grid;gap:12px}
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:12px;
+        }
+        label{display:block;font-size:0.85rem;margin-bottom:6px}
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"],
+        input[type="tel"],
+        select,
+        textarea{
+            width:100%;
+            padding:10px 12px;
+            border:1px solid #e6e9ef;
+            border-radius:6px;
+            font-size:0.95rem;
+            background:#fff;
+            box-sizing:border-box;
+        }
+        textarea{min-height:80px;resize:vertical}
+        .inline{display:flex;gap:8px;align-items:center}
+        .file-preview{width:72px;height:72px;border-radius:6px;object-fit:cover;border:1px solid #e6e9ef}
+        .actions{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:8px}
+        button{
+            background:var(--accent);
+            color:#fff;
+            border:none;
+            padding:10px 14px;
+            border-radius:8px;
+            cursor:pointer;
+            font-weight:600;
+        }
+        button.secondary{
+            background:#fff;border:1px solid #d1d5db;color:#111827;
+        }
+        .hint{font-size:0.85rem;color:var(--muted)}
+        .error{color:#b91c1c;font-size:0.85rem}
+        @media (max-width:700px){ .grid{grid-template-columns:1fr} .actions{flex-direction:column-reverse;align-items:stretch} }
+    </style>
+</head>
+<body>
+    <main class="card" role="main">
+        <h1>Student Signup</h1>
+        <p class="lead">Create your student account. Fields marked with * are required.</p>
+
+        <form id="signupForm" method="post" action="/signup" enctype="multipart/form-data" novalidate>
+            <div class="grid">
+                <div>
+                    <label for="firstName">First name *</label>
+                    <input id="firstName" name="firstName" type="text" required autocomplete="given-name" placeholder="Jane" />
+                </div>
+
+                <div>
+                    <label for="lastName">Last name *</label>
+                    <input id="lastName" name="lastName" type="text" required autocomplete="family-name" placeholder="Doe" />
+                </div>
+
+                <div>
+                    <label for="studentId">Student ID *</label>
+                    <input id="studentId" name="studentId" type="text" required pattern="[A-Za-z0-9\-]{3,20}" placeholder="e.g. S-12345" />
+                </div>
+
+                <div>
+                    <label for="email">Email *</label>
+                    <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@school.edu" />
+                </div>
+
+                <div>
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone" type="tel" pattern="[\d\s+\-()]{7,20}" placeholder="+1 (555) 555-5555" />
+                </div>
+
+                <div>
+                    <label for="dob">Date of birth</label>
+                    <input id="dob" name="dob" type="date" max="2008-12-31" />
+                </div>
+
+                <div>
+                    <label for="course">Course / Major *</label>
+                    <input id="course" name="course" type="text" required placeholder="Computer Science" />
+                </div>
+
+                <div>
+                    <label for="year">Year *</label>
+                    <select id="year" name="year" required>
+                        <option value="">Select year</option>
+                        <option>1st Year</option>
+                        <option>2nd Year</option>
+                        <option>3rd Year</option>
+                        <option>4th Year</option>
+                        <option>Graduate</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label>Gender</label>
+                <div class="inline" role="radiogroup" aria-label="Gender">
+                    <label><input type="radio" name="gender" value="female"> Female</label>
+                    <label><input type="radio" name="gender" value="male"> Male</label>
+                    <label><input type="radio" name="gender" value="other"> Other</label>
+                    <label><input type="radio" name="gender" value="prefer_not"> Prefer not to say</label>
+                </div>
+            </div>
+
+            <div>
+                <label for="address">Address</label>
+                <textarea id="address" name="address" placeholder="Street, City, State, ZIP"></textarea>
+            </div>
+
+            <div style="display:flex;gap:12px;align-items:center;">
+                <div style="flex:1">
+                    <label for="password">Password *</label>
+                    <input id="password" name="password" type="password" required minlength="8" placeholder="At least 8 characters" />
+                </div>
+
+                <div style="flex:1">
+                    <label for="confirmPassword">Confirm password *</label>
+                    <input id="confirmPassword" name="confirmPassword" type="password" required minlength="8" placeholder="Re-enter password" />
+                </div>
+            </div>
+
+            <div class="inline">
+                <div>
+                    <label for="profile">Profile photo</label>
+                    <input id="profile" name="profile" type="file" accept="image/*" />
+                </div>
+                <img id="preview" class="file-preview" alt="Preview" />
+            </div>
+
+            <div>
+                <label>
+                    <input id="terms" name="terms" type="checkbox" required /> I agree to the <a href="#" target="_blank">terms and conditions</a> *
+                </label>
+            </div>
+
+            <div class="actions">
+                <div class="hint">All fields validated client-side. Server-side validation required too.</div>
+                <div style="display:flex;gap:8px;">
+                    <button type="submit">Create account</button>
+                    <button type="reset" class="secondary">Reset</button>
+                </div>
+            </div>
+
+            <div id="formError" class="error" role="alert" style="display:none"></div>
+        </form>
+    </main>
+
+    <script>
+        const form = document.getElementById('signupForm');
+        const pwd = document.getElementById('password');
+        const confirmPwd = document.getElementById('confirmPassword');
+        const formError = document.getElementById('formError');
+        const preview = document.getElementById('preview');
+        const profile = document.getElementById('profile');
+
+        // File preview
+        profile.addEventListener('change', () => {
+            const f = profile.files && profile.files[0];
+            if (!f) { preview.src = ''; return; }
+            const url = URL.createObjectURL(f);
+            preview.src = url;
+            preview.onload = () => URL.revokeObjectURL(url);
+        });
+
+        // Basic password match validator and submit handler
+        form.addEventListener('submit', (e) => {
+            formError.style.display = 'none';
+            formError.textContent = '';
+
+            // Use built-in validity first
+            if (!form.checkValidity()) {
+                // let browser show its native messages, but prevent submit
+                e.preventDefault();
+                form.reportValidity();
+                return;
+            }
+
+            if (pwd.value !== confirmPwd.value) {
+                e.preventDefault();
+                confirmPwd.focus();
+                formError.textContent = 'Passwords do not match.';
+                formError.style.display = 'block';
+                return;
+            }
+
+            // Example: additional client-side checks can go here
+
+            // If all good, allow submit (POST to /signup)
+        });
+
+        // optional: realtime confirm password check
+        confirmPwd.addEventListener('input', () => {
+            if (!confirmPwd.value) { confirmPwd.setCustomValidity(''); return; }
+            confirmPwd.setCustomValidity(pwd.value !== confirmPwd.value ? 'Passwords do not match.' : '');
+        });
+    </script>
+</body>
+</html>
