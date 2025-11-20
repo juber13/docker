@@ -46,5 +46,8 @@ console.log('Generated Token:', token);
 
 console.assert(first, second)
 
+
+console.log('Decoded Token:', verifyToken(token));
+
 export { generateToken, authMiddleware , verifyToken };
 
